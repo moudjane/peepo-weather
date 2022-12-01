@@ -21,7 +21,7 @@ function App() {
           setBackgroundImage('https://risibank.fr/cache/medias/0/5/578/57856/full.gif')
         }
         else if (data.weather[0].main === "Clear") {
-          setBackgroundImage('https://wompampsupport.azureedge.net/fetchimage?siteId=7575&v=2&jpgQuality=100&width=700&url=https%3A%2F%2Fi.ytimg.com%2Fvi%2FPB_AoajxbAw%2Fhqdefault.jpg')
+          setBackgroundImage('https://pbs.twimg.com/media/FTgR2LgXsAEzmx2.jpg')
         }
         else if (data.weather[0].main === "Drizzle") {
           setBackgroundImage('https://media.tenor.com/1f0XJ3jKROkAAAAM/pepe-apu-rain-raincoat-for-profile-picture.gif')

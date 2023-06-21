@@ -15,48 +15,35 @@ function App() {
           return response.json();
         }).then(function (data) {
       if (data.cod === '404') {
-        setError(`City ${city} not found`);
+        setError(`City "${city}" not found`);
         setCity('');
         setWeather('');
         setBackgroundImage('https://media.tenor.com/ffN-es3aN5cAAAAC/peepokc-kcpeepo.gif');
-        setPageTitle('WEATHEEEER');
+        setPageTitle('PEPE WEATHER');
         return;
       }
+      function getBackgroundImage(weather) {
+        switch (weather) {
+          case 'Clouds':
+            return 'https://p4.wallpaperbetter.com/wallpaper/981/359/800/blue-clouds-cloudy-hd-wallpaper-preview.jpg';
+          case 'Rain':
+            return 'https://risibank.fr/cache/medias/0/5/578/57856/full.gif';
+          case 'Drizzle':
+            return 'https://risibank.fr/cache/medias/0/5/578/57856/full.gif';
+          case 'Snow':
+            return 'https://risibank.fr/cache/medias/0/5/578/57856/full.gif';
+          case 'ThunderStorm':
+          case 'Mist':
+          case 'Haze':
+            return 'https://risibank.fr/cache/medias/0/5/578/57856/full.gif';
+          default:
+            return 'https://risibank.fr/cache/medias/0/5/578/57856/full.gif';
+        }
+      }
       setWeather(data);
-      if (data.weather[0].main === "Clouds") {
-        setBackgroundImage('https://p4.wallpaperbetter.com/wallpaper/981/359/800/blue-clouds-cloudy-hd-wallpaper-preview.jpg');
-      }
-      else if (data.weather[0].main === "Rain") {
-        setBackgroundImage('https://risibank.fr/cache/medias/0/5/578/57856/full.gif');
-      }
-      else if (data.weather[0].main === "Clear") {
-        setBackgroundImage('https://pbs.twimg.com/media/FvXGPzoWcA84iNL.jpg');
-      }
-      else if (data.weather[0].main === "Drizzle") {
-        setBackgroundImage('https://media.tenor.com/1f0XJ3jKROkAAAAM/pepe-apu-rain-raincoat-for-profile-picture.gif');
-      }
-      else if (data.weather[0].main === "Snow") {
-        setBackgroundImage('https://media.tenor.com/mCJAwcc1ZbMAAAAC/pepe-christmas.gif');
-      }
-      else if (data.weather[0].main === "ThunderStorm") {
-        setBackgroundImage('https://media.tenor.com/1f0XJ3jKROkAAAAM/pepe-apu-rain-raincoat-for-profile-picture.gif');
-      }
-      else if (data.weather[0].main === "Mist") {
-        setBackgroundImage('https://media.tenor.com/1f0XJ3jKROkAAAAM/pepe-apu-rain-raincoat-for-profile-picture.gif');
-      }
-      else if (data.weather[0].main === "Haze") {
-        setBackgroundImage('https://media.tenor.com/1f0XJ3jKROkAAAAM/pepe-apu-rain-raincoat-for-profile-picture.gif');
-      }
-      else if (data.weather[0].main === "Fog") {
-        setBackgroundImage('https://media.tenor.com/1f0XJ3jKROkAAAAM/pepe-apu-rain-raincoat-for-profile-picture.gif');
-      }
-      else if (data.weather[0].main === "") {
-        setBackgroundImage('https://media.tenor.com/ffN-es3aN5cAAAAC/peepokc-kcpeepo.gif');
-      }
-      console.log(data.weather[0].main);
-      console.log(data);
 
-      setPageTitle(`${data.name} ${data.main.temp}°C | WEATHEEER`);
+
+      setPageTitle(`${data.name} ${data.main.temp}°C`);
     });
   }
 

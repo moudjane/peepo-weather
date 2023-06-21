@@ -8,14 +8,14 @@ function App() {
   const [backgroundImage, setBackgroundImage] = useState('https://media.tenor.com/ZmZ7UKIc0soAAAAM/anonymous-anonymous-bites-back.gif')
   const [error, setError] = useState(null);
 
-  function weatherz() {
+  function weathers() {
     fetch('  https://api.openweathermap.org/data/2.5/weather?q=' + city + '&appid=93f353be3ea3bf5d4140db74968c1fa8&units=metric')
       .then(function (response) {
         setError(null);
         return response.json();
       }).then(function (data) {
         if (data.cod === '404') {
-          setError(`City ${city} not found`);
+          setError(`City "${city}" not found`);
           setCity('');
           setWeather('');
           setBackgroundImage('https://media.tenor.com/ffN-es3aN5cAAAAC/peepokc-kcpeepo.gif')
@@ -29,7 +29,7 @@ function App() {
           setBackgroundImage('https://risibank.fr/cache/medias/0/5/578/57856/full.gif')
         }
         else if (data.weather[0].main === "Clear") {
-          setBackgroundImage('https://pbs.twimg.com/media/FTgR2LgXsAEzmx2.jpg')
+          setBackgroundImage('https://pbs.twimg.com/media/FvXGPzoWcA84iNL.jpg')
         }
         else if (data.weather[0].main === "Drizzle") {
           setBackgroundImage('https://media.tenor.com/1f0XJ3jKROkAAAAM/pepe-apu-rain-raincoat-for-profile-picture.gif')
@@ -58,7 +58,7 @@ function App() {
   }
   const handleKeyDown = (event) => {
     if (event.key === 'Enter') {
-      weatherz(city);
+      weathers(city);
     }
   };
   return (
@@ -68,7 +68,7 @@ function App() {
       <div className="bg" style={{ backgroundImage: `url(${backgroundImage})` }}></div>
       <div>
         <input type="text" placeholder="Type a city" value={city} onChange={e => setCity(e.target.value)} onKeyDown={handleKeyDown}></input>
-        <button onClick={weatherz}>LETSSSGO</button>
+        <button onClick={weathers}>LETSSSGO</button>
       </div>
       {error ?
         <div className='error'>

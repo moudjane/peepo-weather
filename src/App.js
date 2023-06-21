@@ -6,13 +6,21 @@ function App() {
   const [city, setCity] = useState('')
   const [weather, setWeather] = useState('')
   const [backgroundImage, setBackgroundImage] = useState('https://media.tenor.com/ZmZ7UKIc0soAAAAM/anonymous-anonymous-bites-back.gif')
-  //https://media.tenor.com/ffN-es3aN5cAAAAC/peepokc-kcpeepo.gif
+  const [error, setError] = useState(null);
 
   function weatherz() {
     fetch('  https://api.openweathermap.org/data/2.5/weather?q=' + city + '&appid=93f353be3ea3bf5d4140db74968c1fa8&units=metric')
       .then(function (response) {
+        setError(null);
         return response.json();
       }).then(function (data) {
+        if (data.cod === '404') {
+          setError(`City ${city} not found`);
+          setCity('');
+          setWeather('');
+          setBackgroundImage('https://media.tenor.com/ffN-es3aN5cAAAAC/peepokc-kcpeepo.gif')
+          return;
+        }
         setWeather(data)
         if (data.weather[0].main === "Clouds") {
           setBackgroundImage('https://p4.wallpaperbetter.com/wallpaper/981/359/800/blue-clouds-cloudy-hd-wallpaper-preview.jpg')
@@ -62,6 +70,11 @@ function App() {
         <input type="text" placeholder="Type a city" value={city} onChange={e => setCity(e.target.value)} onKeyDown={handleKeyDown}></input>
         <button onClick={weatherz}>LETSSSGO</button>
       </div>
+      {error ?
+        <div className='error'>
+          <p>{error}</p>
+        </div>
+        : null}
       {weather.main ?
         <div className='weather-main'>
           <div className='weather-main2'>
@@ -80,10 +93,10 @@ function App() {
           <div className='bloc1'>Humidity:
             <div className='weather-stat'>{weather.main.humidity} %</div>
           </div>
-          <div className='bloc2'>Wind wpeed:
+          <div className='bloc2'>Wind speed:
             <div className='weather-stat'>{weather.wind.speed} m/s</div>
           </div>
-          <div className='bloc3'>Wind wpeed:
+          <div className='bloc3'>Wind speed:
             <div className='weather-stat'>{weather.wind.speed} m/s</div>
           </div>
         </div>

@@ -26,23 +26,23 @@ function App() {
         switch (weather) {
           case 'Clouds':
             return 'https://p4.wallpaperbetter.com/wallpaper/981/359/800/blue-clouds-cloudy-hd-wallpaper-preview.jpg';
-          case 'Rain':
-            return 'https://risibank.fr/cache/medias/0/5/578/57856/full.gif';
+          case 'Clear':
+            return 'https://pbs.twimg.com/media/FvXGPzoWcA84iNL.jpg';
           case 'Drizzle':
-            return 'https://risibank.fr/cache/medias/0/5/578/57856/full.gif';
+            return 'https://media.tenor.com/1f0XJ3jKROkAAAAM/pepe-apu-rain-raincoat-for-profile-picture.gif';
           case 'Snow':
-            return 'https://risibank.fr/cache/medias/0/5/578/57856/full.gif';
+            return 'https://media.tenor.com/mCJAwcc1ZbMAAAAC/pepe-christmas.gif';
           case 'ThunderStorm':
           case 'Mist':
           case 'Haze':
+          case 'Fog':
             return 'https://risibank.fr/cache/medias/0/5/578/57856/full.gif';
           default:
             return 'https://risibank.fr/cache/medias/0/5/578/57856/full.gif';
         }
       }
       setWeather(data);
-
-
+      setBackgroundImage(getBackgroundImage(data.weather[0].main));
       setPageTitle(`${data.name} ${data.main.temp}°C`);
     });
   }
@@ -63,7 +63,7 @@ function App() {
 
   return (
       <div className='App'>
-        <h1>WEATHEEEEEEEEER</h1>
+        <h1>PEEPO WEATHEEER</h1>
         <div className="bg" style={{ backgroundImage: `url(${backgroundImage})` }}></div>
         <div>
           <input type="text" placeholder="Type a city" value={city} onChange={e => setCity(e.target.value)} onKeyDown={handleKeyDown}></input>

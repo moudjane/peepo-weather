@@ -96,7 +96,7 @@ function App() {
                 <div className='weather-stat'>{weather.wind.speed} m/s</div>
               </div>
               <div className='bloc3'>Wind speed:
-                <div className='weather-stat'>?</div>
+                <div className='weather-stat'>???</div>
               </div>
             </div>
             : null}

@@ -1,0 +1,20 @@
+	const getBackgroundImage = (weather) => {
+		switch (weather) {
+			case 'Clouds':
+				return 'https://p4.wallpaperbetter.com/wallpaper/981/359/800/blue-clouds-cloudy-hd-wallpaper-preview.jpg';
+			case 'Clear':
+				return 'https://pbs.twimg.com/media/FvXGPzoWcA84iNL.jpg';
+			case 'Drizzle':
+				return 'https://media.tenor.com/1f0XJ3jKROkAAAAM/pepe-apu-rain-raincoat-for-profile-picture.gif';
+			case 'Snow':
+				return 'https://media.tenor.com/mCJAwcc1ZbMAAAAC/pepe-christmas.gif';
+			case 'ThunderStorm':
+			case 'Mist':
+			case 'Haze':
+			case 'Rain':
+			case 'Fog':
+				return 'https://risibank.fr/cache/medias/0/5/578/57856/full.gif';
+			default:
+				return 'https://media.tenor.com/ZmZ7UKIc0soAAAAM/anonymous-anonymous-bites-back.gif';
+		}
+	};

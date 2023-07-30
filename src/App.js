@@ -49,10 +49,11 @@ function App() {
 	}, []);
 
 	const handleAddToFavorites = () => {
-		if (!favorites.includes(city)) {
-			setFavorites([...favorites, city]);
+		if (weather && weather.name && !favorites.includes(weather.name)) {
+			setFavorites([...favorites, weather.name]);
 		}
 	};
+
 
 	const handleRemoveFromFavorites = (cityToRemove, handleFavoriteCityClick) => {
 		const updatedFavorites = favorites.filter((city) => city !== cityToRemove);
@@ -77,11 +78,11 @@ function App() {
 	// 	}
 	// };
 
-	// const handleClick = () => {
-	// 	if (city.trim() !== '') {
-	// 		fetchWeather();
-	// 	}
-	// };
+	const handleClick = () => {
+		if (city.trim() !== '') {
+			fetchWeather();
+		}
+	};
 
 	const fetchWeather = (cityName) => {
 		if (cityName === previousCity) {
@@ -198,7 +199,7 @@ function App() {
 					onChange={(e) => setCity(e.target.value)}
 					onKeyDown={handleKeyDown}
 				/>
-				{/*<button onClick={handleClick}>Get Weather</button>*/}
+				<button onClick={handleClick}>Get Weather</button>
 				<button onClick={handleAddToFavorites}>Add to Favorites</button>
 			</div>
 			{error && (

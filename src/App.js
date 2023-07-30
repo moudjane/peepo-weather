@@ -164,8 +164,7 @@ function App() {
 				className={`burger-menu ${showSidebar ? "open" : ""}`}
 				onClick={handleSidebarToggle}
 			>
-				<img className="burger-icon" src="http://www.rw-designer.com/icon-image/20369-48x48x32.png" alt="Burger Icon" />
-			</button>
+					<img src={require('./menuburger.png')} alt="peepomenuburger" />			</button>
 			</header>
 
 			<div className={`sidebar ${showSidebar ? "show" : ""}`}>

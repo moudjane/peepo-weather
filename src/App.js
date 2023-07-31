@@ -60,7 +60,7 @@ function App() {
 	};
 
 	const handleSidebarToggle = () => {
-		setShowSidebar(!showSidebar); // Renommez showFavoritesMenu en showSidebar
+		setShowSidebar(!showSidebar);
 	};
 
 	const handleFavoriteCityClick = (cityName) => {
@@ -91,22 +91,33 @@ function App() {
 		const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=62b373b788ee8bd05543ab5cf42c60ce&units=metric`;
 		const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=62b373b788ee8bd05543ab5cf42c60ce&units=metric`;
 
-		Promise.all([fetchWeatherData(weatherUrl), fetchWeatherData(forecastUrl)])
-			.then(([weatherData, forecastData]) => {
+		Promise.all([
+			fetchWeatherData(weatherUrl),
+			fetchWeatherData(forecastUrl),
+		])
+			.then(([currentWeatherData, forecastData]) => {
 				const dailyForecasts = forecastData.list.filter(
 					(item, index) => index % 8 === 0
 				);
 
 				const formattedForecasts = dailyForecasts.map((forecast) => {
 					const date = new Date(forecast.dt_txt);
-					const options = { weekday: "long", day: "numeric", month: "numeric" };
+					const options = {
+						weekday: "long",
+						day: "numeric",
+						month: "numeric",
+					};
 					forecast.dt_txt = date.toLocaleDateString("en-EN", options);
 					return forecast;
 				});
 
-				setWeather({ ...weatherData, dailyForecasts: formattedForecasts });
-				setBackgroundImage(getBackgroundImage(weatherData.weather[0].main));
-				setPageTitle(`${weatherData.name} ${weatherData.main.temp}°C`);
+				setWeather({
+					...currentWeatherData,
+					dailyForecasts: formattedForecasts,
+					hourlyForecasts: forecastData.list,
+				});
+				setBackgroundImage(getBackgroundImage(currentWeatherData.weather[0].main));
+				setPageTitle(`${currentWeatherData.name} ${currentWeatherData.main.temp}°C`);
 			})
 			.catch((error) => {
 				setError(`City "${cityName}" not found`);
@@ -161,10 +172,11 @@ function App() {
 			<header>
 				<h1>PEEPO WEATHEEER</h1>
 				<button
-				className={`burger-menu ${showSidebar ? "open" : ""}`}
-				onClick={handleSidebarToggle}
-			>
-					<img src={require('./menuburger.png')} alt="peepomenuburger" />			</button>
+					className={`burger-menu ${showSidebar ? "open" : ""}`}
+					onClick={handleSidebarToggle}
+				>
+					<img src={require("./menuburger.png")} alt="peepomenuburger" />{" "}
+				</button>
 			</header>
 
 			<div className={`sidebar ${showSidebar ? "show" : ""}`}>
@@ -181,16 +193,14 @@ function App() {
 				</ul>
 			</div>
 
-			<div>
-				{/*<button onClick={fetchWeather}>Get Weather</button>*/}
-			</div>
+			<div>{/*<button onClick={fetchWeather}>Get Weather</button>*/}</div>
 
 			<div
 				className="bg"
 				style={{ backgroundImage: `url(${backgroundImage})` }}
 			/>
 			<div>
-				<br/>
+				<br />
 				<input
 					type="text"
 					placeholder="Type a city"
@@ -199,15 +209,14 @@ function App() {
 					onKeyDown={handleKeyDown}
 				/>
 				{/*<button onClick={handleClick}>Get Weather</button>*/}
-				{weather && !favorites.includes(weather.name) && (
-					<button onClick={handleAddToFavorites}>
-						Add to Favorites
-					</button>
-				)}
+
 			</div>
+			{weather && !favorites.includes(weather.name) && (
+				<button onClick={handleAddToFavorites}>Add to Favorites</button>
+			)}
 			{error && (
 				<div className="error">
-					<p>{error}</p>
+					<span>{error}</span>
 				</div>
 			)}
 			{isLoading && (
@@ -237,24 +246,36 @@ function App() {
 				</div>
 			)}
 
+			{/*{weather && weather.hourlyForecasts && (*/}
+			{/*	<div className="hourly-forecast">*/}
+			{/*		<h2>Hourly Forecast</h2>*/}
+			{/*		<div className="hourly-forecast-list">*/}
+			{/*			{weather.hourlyForecasts.slice(1).map((hourlyForecast, index) => (*/}
+			{/*				<div key={index} className="hourly-forecast-item">*/}
+			{/*					<span>{hourlyForecast.dt_txt.split(" ")[1]}</span>*/}
+			{/*					<img*/}
+			{/*						src={`https://openweathermap.org/img/wn/${hourlyForecast.weather[0].icon}.png`}*/}
+			{/*						alt={hourlyForecast.weather[0].description}*/}
+			{/*					/>*/}
+			{/*					<span>{hourlyForecast.main.temp}°C</span>*/}
+			{/*				</div>*/}
+			{/*			))}*/}
+			{/*		</div>*/}
+			{/*	</div>*/}
+			{/*)}*/}
+
 			{weather && weather.dailyForecasts && (
 				<div className="weather-banner">
 					<div className="weekly-forecast">
-						{weather.dailyForecasts.map((forecast, index) => (
+						{weather.dailyForecasts.slice(1).map((forecast, index) => (
 							<div key={index} className="weather-forecast">
-								{index > 0 && (
-									<>
-										<span>{forecast.dt_txt}</span>
-										<span>
-                      {forecast.main.temp_max}°C / {forecast.main.temp_min}°C
-                    </span>
-										<img
-											src={`https://openweathermap.org/img/wn/${forecast.weather[0].icon}.png`}
-											alt={forecast.weather[0].description}
-										/>
-										<span>{forecast.weather[0].main}</span>
-									</>
-								)}
+								<span>{forecast.dt_txt}</span>
+								<span>{forecast.main.temp_max}°C</span>
+								<img
+									src={`https://openweathermap.org/img/wn/${forecast.weather[0].icon}.png`}
+									alt={forecast.weather[0].description}
+								/>
+								<span>{forecast.weather[0].main}</span>
 							</div>
 						))}
 					</div>

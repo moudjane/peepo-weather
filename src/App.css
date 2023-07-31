@@ -10,9 +10,6 @@ html {
 header {
   background-color: #333;
   padding: 1rem;
-  /*display: flex;*/
-  /*align-items: center;*/
-  /*justify-content: space-between;*/
 }
 
 ::selection {
@@ -75,7 +72,6 @@ h1 {
   flex-direction: column;
   font-size: 20px;
   padding: 5px;
-  /*z-index: 100;*/
   color: white;
   border-radius: 14px;
   z-index: 1;
@@ -139,6 +135,7 @@ h1 {
 
 .weekly-forecast {
   display: flex;
+  justify-content: space-between;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   scrollbar-width: none;
@@ -154,6 +151,10 @@ h1 {
   flex: 0 0 auto;
   text-align: center;
   padding: 4px;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
 .weather-forecast span {
@@ -174,7 +175,7 @@ input {
   width: 25%;
 }
 
-/* Nouveaux styles pour les prévisions horizontales */
+/* DAILY WEATHER */
 .weather-banner {
   position: fixed;
   bottom: 20px;
@@ -195,7 +196,7 @@ input {
 }
 
 .weather-forecast {
-  flex: 0 0 22.333%; /* Changer la largeur ici pour afficher 3 jours à la fois */
+  flex: 0 0 22.222%;
   text-align: center;
   padding: 4px;
 }
@@ -212,16 +213,13 @@ input {
   left: 10px;
 }
 
-
 .sidebar {
   position: fixed;
   top: 0;
-  left: -200px;
-  width: 200px;
+  left: -300px;
+  width: 300px;
   height: 100%;
   background-color: #222;
-  /*padding: 1rem;*/
-  box-shadow: 2px 0 6px rgba(0, 0, 0, 0.3);
   transition: left 0.3s ease;
   z-index: 2;
 }
@@ -235,29 +233,57 @@ h2 {
   margin-bottom: 1rem;
 }
 
-/*ul {*/
-/*  list-style: none;*/
-/*  padding: 0;*/
-/*  margin: 0;*/
-/*}*/
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
 
-/*li {*/
-/*  display: flex;*/
-/*  justify-content: space-between;*/
-/*  align-items: center;*/
-/*  margin-bottom: 0.5rem;*/
-/*}*/
+li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  margin-bottom: 0.5rem;
 
-/*li span {*/
-/*  color: white;*/
-/*}*/
+}
 
-/*li button {*/
-/*  background-color: #ff6b6b;*/
-/*  color: white;*/
-/*  border: none;*/
-/*  padding: 0.3rem 0.5rem;*/
-/*  border-radius: 4px;*/
-/*  cursor: pointer;*/
-/*  font-size: 0.8rem;*/
-/*}*/
+li span {
+  color: white;
+}
+
+li button {
+  background-color: #ff6b6b;
+  color: white;
+  border: none;
+  padding: 0.3rem 0.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+
+.github-footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding-bottom: 25px;
+  text-align: center;
+}
+
+.github-link{
+  color: white;
+  text-decoration: none;
+  font-size: 1.6rem;
+}
+
+.github-link:hover{
+  text-decoration: none;
+  color: #58db42;
+}
+
+.favorites_cities{
+  background-color: #58db42;
+  border: transparent;
+}

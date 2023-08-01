@@ -1,6 +1,7 @@
 import "./App.css";
 import { useState, useEffect } from "react";
 import Sidebar from "./Sidebar";
+import config from './config';
 
 function App() {
 	const [city, setCity] = useState("");
@@ -88,8 +89,8 @@ function App() {
 			return;
 		}
 
-		const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=62b373b788ee8bd05543ab5cf42c60ce&units=metric`;
-		const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=62b373b788ee8bd05543ab5cf42c60ce&units=metric`;
+		const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${config.apiKey}&units=metric`;
+		const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=${config.apiKey}&units=metric`;
 
 		Promise.all([
 			fetchWeatherData(weatherUrl),

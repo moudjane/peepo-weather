@@ -38,18 +38,9 @@ h1 {
 
 }
 
-/*button {*/
-/*  font-family: 'Roboto', sans-serif;*/
-/*  color: white;*/
-/*  background-color: rgba(47, 45, 45, 0.6);*/
-/*  font-size: 1.2rem;*/
-/*  margin: 0 auto;*/
-/*  padding: 0.5rem;*/
-/*  border-radius: 0.2rem;*/
-/*  border: none;*/
-/*  width: 10%;*/
-/*  outline: none;*/
-/*}*/
+button {
+  outline: none;
+}
 
 ::placeholder {
   color: #ccc4c4;

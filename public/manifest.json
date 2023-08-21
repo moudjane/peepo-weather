@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Peepo Weather",
+  "name": "Peepo Weather",
   "icons": [
     {
       "src": "favicon.ico",
